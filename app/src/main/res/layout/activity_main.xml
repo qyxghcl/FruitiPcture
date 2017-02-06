@@ -46,7 +46,7 @@
             android:layout_gravity="bottom|right|end"
             android:layout_margin="16dp"
             android:src="@drawable/ic_done"
-            app:layout_behavior="com.example.fruitpictures.presenter.VerticalFabBehavior"
+            app:layout_behavior="com.example.fruitpictures.presenter.ScaleDownShowBehavior"
         />
     </android.support.design.widget.CoordinatorLayout>
 
