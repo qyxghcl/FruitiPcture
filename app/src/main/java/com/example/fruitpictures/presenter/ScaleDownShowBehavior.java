@@ -9,7 +9,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.materialdesigntest.utils.AnimatorUtil;
+import com.example.fruitpictures.utils.AnimatorUtil;
+
 
 /**
  * Created by hwj on 2017/1/29.

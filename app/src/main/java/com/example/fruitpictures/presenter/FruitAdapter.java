@@ -11,11 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.materialdesigntest.R;
-import com.example.materialdesigntest.bean.Fruit;
-import com.example.materialdesigntest.view.FruitActivity;
+import com.example.fruitpictures.R;
+import com.example.fruitpictures.bean.Fruit;
+import com.example.fruitpictures.view.FruitActivity;
 
 import java.util.ArrayList;
+
 
 /**
  * Created by hwj on 2017/1/28.
