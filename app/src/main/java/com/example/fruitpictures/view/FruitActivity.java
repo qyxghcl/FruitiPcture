@@ -24,8 +24,9 @@ public class FruitActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fruit);
         Intent intent = getIntent();
-        String  fruitName= intent.getStringExtra(FRUIT_NAME);
-        int  fruitImageId= intent.getIntExtra(FRUIT_IMAGE_ID,0);
+       String  fruitName= intent.getStringExtra(FRUIT_NAME);
+     //   int  fruitImageId= intent.getIntExtra(FRUIT_IMAGE_ID,0);
+        String url = intent.getStringExtra(FRUIT_IMAGE_ID);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_layout);
@@ -38,15 +39,15 @@ public class FruitActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        collapsingToolbarLayout.setTitle(fruitName);
-        Glide.with(this).load(fruitImageId).into(fruitIamge);
+        collapsingToolbarLayout.setTitle("图片");
+        Glide.with(this).load(url).into(fruitIamge);
         String fruitContent = generateFruitContent(fruitName);
         fruitContentText.setText(fruitContent);
     }
 
     private String generateFruitContent(String fruitName) {
         for (int i = 0; i < 100; i++) {
-            fruitName = fruitName + "思想味俱全，补充维生素，保持水分，滋补养颜抗衰老";
+            fruitName = fruitName + "手心上，亘古的月光，你翘首祈祷，而我矗立一旁";
         }
 
         return fruitName;

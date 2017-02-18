@@ -20,7 +20,7 @@
         <item
             android:id="@+id/nav_task"
             android:icon="@drawable/nav_task"
-            android:title="Tasks" />
+            android:title="分享" />
 
     </group>
 
