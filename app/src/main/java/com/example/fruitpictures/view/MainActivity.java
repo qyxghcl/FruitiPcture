@@ -17,6 +17,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fruitpictures.R;
@@ -24,6 +27,7 @@ import com.example.fruitpictures.bean.Images;
 import com.example.fruitpictures.model.ImageServices;
 import com.example.fruitpictures.presenter.FruitAdapter;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private static final int SUCCESS = 1;
     private Handler mHandler = new Handler() {
+
+        private FruitAdapter mMAdapter;
+
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -64,8 +71,10 @@ public class MainActivity extends AppCompatActivity {
                         mImages.add(results.get(i).getUrl());
                     }
 
-                    FruitAdapter mAdapter = new FruitAdapter(mImages);
-                    mRecyclerView.setAdapter(mAdapter);
+                    mMAdapter = new FruitAdapter(mImages);
+                    mRecyclerView.setAdapter(mMAdapter);
+
+                    updateSuspensionBar();
                     break;
             }
 
@@ -73,6 +82,10 @@ public class MainActivity extends AppCompatActivity {
         }
     };
     private RecyclerView mRecyclerView;
+    private LinearLayoutManager mLinearLayoutManager;
+    private RelativeLayout mSuspensionBar;
+    private TextView mSuspensionTv;
+    private ImageView mSuspensionIv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,12 +117,14 @@ public class MainActivity extends AppCompatActivity {
 
         initFruits();
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-      //  GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        //  GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         //设置recycleView显示的布局方式，有三种
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mLinearLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
-
-
+        mSuspensionBar = (RelativeLayout) findViewById(R.id.suspension_bar);
+        mSuspensionTv = (TextView) findViewById(R.id.tv_nickname);
+        mSuspensionIv = (ImageView) findViewById(R.id.iv_avatar);
         //下拉刷新
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
@@ -120,6 +135,48 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        mRecyclerView.addOnScrollListener(mOnScrollChangeListener);
+        updateSuspensionBar();
+
+    }
+
+    private int mCurrentPosition = 0;
+    private int mSuspensionHeight;
+    private RecyclerView.OnScrollListener mOnScrollChangeListener = new RecyclerView.OnScrollListener() {
+        @Override public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+            mSuspensionHeight = mSuspensionBar.getHeight();
+        }
+
+        @Override public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+            View view = mLinearLayoutManager.findViewByPosition(mCurrentPosition + 1);
+            if (view != null) {
+                if (view.getTop() <= mSuspensionHeight) {
+                    mSuspensionBar.setY(-(mSuspensionHeight - view.getTop()));
+                } else {
+                    mSuspensionBar.setY(0);
+                }
+            }
+
+            if (mCurrentPosition != mLinearLayoutManager.findFirstVisibleItemPosition()) {
+                mCurrentPosition = mLinearLayoutManager.findFirstVisibleItemPosition();
+                mSuspensionBar.setY(0);
+
+                updateSuspensionBar();
+            }
+        }
+    };
+
+    private void updateSuspensionBar() {
+        Picasso.with(MainActivity.this)
+                .load(getAvatarResId(mCurrentPosition))
+                .centerInside()
+                .fit()
+                .into(mSuspensionIv);
+
+        mSuspensionTv.setText("Taeyeon " + mCurrentPosition);
     }
 
     private void refreshFruits() {
@@ -145,6 +202,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private int getAvatarResId(int position) {
+        switch (position % 4) {
+            case 0:
+                return R.drawable.avatar1;
+            case 1:
+                return R.drawable.avatar2;
+            case 2:
+                return R.drawable.avatar3;
+            case 3:
+                return R.drawable.avatar4;
+        }
+        return 0;
+    }
+
     private void initFruits() {
        /* mFruits.clear();
         for (int i = 0; i < 50; i++) {
@@ -165,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
 
         ImageServices imageServices = retrofit.create(ImageServices.class);
 
-        String page = count++%8 + "";
+        String page = count++ % 8 + "";
         Call<String> call = imageServices.loagImages(page);
 
         call.enqueue(new Callback<String>() {

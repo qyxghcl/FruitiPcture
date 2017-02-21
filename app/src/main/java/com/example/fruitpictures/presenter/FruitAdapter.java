@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.fruitpictures.R;
 import com.example.fruitpictures.view.FruitActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -28,9 +30,13 @@ public class FruitAdapter extends RecyclerView.Adapter {
 
     static class  ViewHolder extends RecyclerView.ViewHolder{
         ImageView im;
+        ImageView mIvAvatar;
+        TextView mTvNickname;
         public ViewHolder(View itemView) {
             super(itemView);
             this.im = (ImageView) itemView.findViewById(R.id.iv_image);
+            mIvAvatar = (ImageView) itemView.findViewById(R.id.iv_avatar);
+            mTvNickname = (TextView) itemView.findViewById(R.id.tv_nickname);
         }
     }
     @Override
@@ -59,7 +65,28 @@ public class FruitAdapter extends RecyclerView.Adapter {
         ViewHolder viewHolder = (ViewHolder) holder;
         Glide.with(mContext).load(uri).into(viewHolder.im);
 
+        Picasso.with(holder.itemView.getContext())
+                .load(getAvatarResId(position))
+                .centerInside()
+                .fit()
+                .into(viewHolder.mIvAvatar);
+
+        viewHolder.mTvNickname.setText("Taeyeon " + position);
     }
+    private int getAvatarResId(int position) {
+        switch (position % 4) {
+            case 0:
+                return R.drawable.avatar1;
+            case 1:
+                return R.drawable.avatar2;
+            case 2:
+                return R.drawable.avatar3;
+            case 3:
+                return R.drawable.avatar4;
+        }
+        return 0;
+    }
+
 
     @Override
     public int getItemCount() {

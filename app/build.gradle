@@ -35,4 +35,5 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.squareup.retrofit2:retrofit-adapters:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
