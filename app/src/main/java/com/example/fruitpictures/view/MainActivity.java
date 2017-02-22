@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private static final int SUCCESS = 1;
-    private Handler mHandler = new Handler() {
+    private static Handler mHandler = new Handler() {
 
         private FruitAdapter mMAdapter;
 
@@ -74,14 +74,13 @@ public class MainActivity extends AppCompatActivity {
                     mMAdapter = new FruitAdapter(mImages);
                     mRecyclerView.setAdapter(mMAdapter);
 
-                    updateSuspensionBar();
                     break;
             }
 
             super.handleMessage(msg);
         }
     };
-    private RecyclerView mRecyclerView;
+    private static RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private RelativeLayout mSuspensionBar;
     private TextView mSuspensionTv;
@@ -172,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateSuspensionBar() {
         Picasso.with(MainActivity.this)
                 .load(getAvatarResId(mCurrentPosition))
-                .centerInside()
+                .centerInside()   
                 .fit()
                 .into(mSuspensionIv);
 
