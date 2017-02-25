@@ -143,12 +143,14 @@ public class MainActivity extends AppCompatActivity {
     private int mCurrentPosition = 0;
     private int mSuspensionHeight;
     private RecyclerView.OnScrollListener mOnScrollChangeListener = new RecyclerView.OnScrollListener() {
-        @Override public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
             mSuspensionHeight = mSuspensionBar.getHeight();
         }
 
-        @Override public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
             View view = mLinearLayoutManager.findViewByPosition(mCurrentPosition + 1);
             if (view != null) {
@@ -171,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateSuspensionBar() {
         Picasso.with(MainActivity.this)
                 .load(getAvatarResId(mCurrentPosition))
-                .centerInside()   
+                .centerInside()
                 .fit()
                 .into(mSuspensionIv);
 
