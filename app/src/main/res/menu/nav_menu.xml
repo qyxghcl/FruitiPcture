@@ -16,7 +16,7 @@
         <item
             android:id="@+id/nav_mail"
             android:icon="@drawable/nav_mail"
-            android:title="Mail" />
+            android:title="AndroidChart" />
         <item
             android:id="@+id/nav_task"
             android:icon="@drawable/nav_task"

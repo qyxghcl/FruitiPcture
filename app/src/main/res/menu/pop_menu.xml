@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item
+        android:id="@+id/pie_Chart"
+        android:orderInCategory="100"
+        app:showAsAction="collapseActionView"
+        android:title="饼状图"
+        >
+    </item>
+    <item
+        android:id="@+id/ling_Chart"
+        android:orderInCategory="100"
+        app:showAsAction="withText"
+        android:title="折线图"
+        />
+    <item
+        android:id="@+id/Bar_Chart"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:title="柱状图"
+        >
+    </item>
+</menu>

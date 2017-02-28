@@ -36,4 +36,5 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit-adapters:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
 }

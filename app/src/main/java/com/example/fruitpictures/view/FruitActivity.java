@@ -47,7 +47,7 @@ public class FruitActivity extends AppCompatActivity {
 
     private String generateFruitContent(String fruitName) {
         for (int i = 0; i < 100; i++) {
-            fruitName = fruitName + "手心上，亘古的月光，你翘首祈祷，而我矗立一旁。/r/n";
+            fruitName = fruitName + "手心上，亘古的月光，你翘首祈祷，而我矗立一旁.\n";
         }
 
         return fruitName;
