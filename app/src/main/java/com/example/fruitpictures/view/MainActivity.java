@@ -307,7 +307,7 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
 
                 case R.id.nav_mail:
-
+                    break;
                 case R.id.nav_task:
                     item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                         @Override
