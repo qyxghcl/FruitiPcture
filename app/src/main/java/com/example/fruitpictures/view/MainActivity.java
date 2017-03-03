@@ -1,5 +1,6 @@
 package com.example.fruitpictures.view;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -138,6 +139,11 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.addOnScrollListener(mOnScrollChangeListener);
         updateSuspensionBar();
+
+        ObjectAnimator anim = ObjectAnimator.ofObject(mSuspensionTv, "color", new ColorEvaluator(),
+                "#0000FF", "#FF0000");
+        anim.setDuration(5000);
+        anim.start();
 
     }
 

@@ -48,11 +48,11 @@ public class GooView extends View {
     }
 
     //固定圆的圆心
-    private PointF stickCenter = new PointF(200f, 200f);
+    private PointF stickCenter = new PointF(550f, 550f);
     //固定园的半径
-    private float sticRadius = 9f;
-    private PointF dragCenter = new PointF(200f, 200f);
-    private float dragRadius = 9f;
+    private float sticRadius = 60f;
+    private PointF dragCenter = new PointF(550f, 550f);
+    private float dragRadius = 60f;
     //定义固定圆的附着点坐标
     private PointF[] stickPoints = new PointF[]{
             new PointF(250f, 300f),
@@ -66,8 +66,8 @@ public class GooView extends View {
     //控制点
     private PointF controlPoint = new PointF(200f, 325f);
 
-    public static final float MIN_STICKRADIUDS = 5f;
-    public static final float MAX_DISTANCE = 80f;
+    public static final float MIN_STICKRADIUDS = 15f;
+    public static final float MAX_DISTANCE = 700f;
 
     @Override
     protected void onDraw(Canvas canvas) {
